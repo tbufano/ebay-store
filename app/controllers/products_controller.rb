@@ -3,7 +3,6 @@ class ProductsController < ApplicationController
     @products = Product.all
     sort_attribute = params[:sort]
     sort_attribute_desc = params[:sort_desc]
-    sort_by_amount = params[:discount]
     if sort_attribute
       @products = Product.order(sort_attribute)
     elsif sort_attribute_desc
@@ -32,7 +31,12 @@ class ProductsController < ApplicationController
 
   def show
     product_id = params[:id]
-    @product = Product.find_by(id: product_id)
+    if product_id == "random"
+      products = Product.all
+      @product = products.sample
+    else
+      @product = Product.find_by(id: product_id)
+    end
     render = "show.html.erb"
   end
 
