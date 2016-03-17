@@ -1,0 +1,20 @@
+<div class="container">
+  <h1>Product Detail</h1>
+</div>
+
+<div class="container">
+  <p><a href="/products"><button type="button" class="btn btn-primary">All Products</button></a></p>
+  <p><a href="/products/<%= @product.id %>/edit"><button type="button" class="btn btn-primary">Edit Product</button></a></p>
+  <p><%= link_to "Destroy Product", "/products/#{@product.id}", method: :delete, class: "btn btn-primary" %></p>
+</div>
+
+<div class="container">
+  <hr>
+  <p><img src="<%= @product.image %>" width=300></p>
+  <p><strong>Title:</strong> <%= @product.title %></p>
+  <p><strong>Price:</strong> <%= number_to_currency(@product.price) + " " + @product.sale_message %></p>
+  <p><strong>Tax:</strong> <%= number_to_currency(@product.tax) %></p>
+  <p><strong>Total:</strong> <%= number_to_currency(@product.total) %></p>
+  <p><strong>Description:</strong> <%= @product.description %></p>
+  <p><strong>Quantity:</strong> <%= @product.quantity %></p>
+</div>

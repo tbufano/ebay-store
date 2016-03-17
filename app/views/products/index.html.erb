@@ -1,0 +1,25 @@
+<div class="container">
+  <h1>Products</h1>
+</div>
+
+<div class="container">
+  <p><a href="/products/new"><button type="button" class="btn btn-primary">Create a New Product</button></a></p>
+</div>
+
+<div class="container">
+  <p><a href="/products?sort=price">Sort by Price (lowest to highest)</a> | <a href="/products?sort=price%20DESC">Sort by Price (highest to lowest)</a> | <a href="/products?sort=title">Sort by Title</a></p>
+</div>
+
+<div class="row">
+  <% @products.each do |product| %>
+    <div class="col-md-3">
+      <div class="well">
+        <p><img src="<%= product.image %>"></p>
+        <p><strong>Title:</strong> <a href="/products/<%= product.id %>"><%= product.title %></a></p>
+        <p><strong>Price:</strong> <%= number_to_currency(product.price) %></p>
+        <p><strong>Quantity:</strong> <%= product.quantity %></p>
+        <p><strong>In Stock:</strong> <%= product.item_in_stock %></p>
+      </div>
+    </div>
+  <% end %>
+</div>
