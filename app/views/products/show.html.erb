@@ -10,7 +10,9 @@
 
 <div class="container">
   <hr>
-  <p><img src="<%= @product.image %>" width=300></p>
+  <%= @product.images.each do |image| %>
+    <img src="<%= image.image %>" alt="<%= @product.title %>" width=300>
+  <% end %>
   <p><strong>Title:</strong> <%= @product.title %></p>
   <p><strong>Price:</strong> <%= number_to_currency(@product.price) + " " + @product.sale_message %></p>
   <p><strong>Tax:</strong> <%= number_to_currency(@product.tax) %></p>

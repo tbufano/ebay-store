@@ -1,14 +1,18 @@
 class ProductsController < ApplicationController
   def index
     @products = Product.all
+    @images = Image.all
     sort_attribute = params[:sort]
     sort_attribute_desc = params[:sort_desc]
+    sort_by_amount = params[:discounted]
     if sort_attribute
       @products = Product.order(sort_attribute)
     elsif sort_attribute_desc
       @products = Product.order(sort_attribute_desc => :desc)
-    elsif discounted_item
+    elsif sort_by_amount
       @products = Product.where("#{sort_by_amount} < ?", 50)
+    else
+      render "index.html.erb"
     end
   end
 
@@ -67,5 +71,11 @@ class ProductsController < ApplicationController
     @product.destroy
     flash[:warning] = "Product successfully destroyed!"
     redirect_to "/products"
+  end
+
+  def search
+    search_term = params[:search]
+    @products = Product.where("name LIKE ?", "%#{search_term}%")
+    render 'index.html.erb'
   end
 end
