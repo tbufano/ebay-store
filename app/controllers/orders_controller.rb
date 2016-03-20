@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   def create
+    subtotal = params[:buy_quantity]
     order = Order.create(
       buy_quantity: params[:buy_quantity],
       product_id: params[:product_id],
