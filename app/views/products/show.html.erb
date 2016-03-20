@@ -20,7 +20,7 @@
   <p><strong>Description:</strong> <%= @product.description %></p>
   <p><strong>Quantity:</strong> <%= @product.quantity %></p>
 
-  <%= form_tag "/products/#{@product.id}", method: :patch do %>
+  <%= form_tag "/orders", method: :post do %>
     <div class="form-group">
       <%= label_tag :buy_quantity %>
       <%= text_field_tag :buy_quantity, "", class: "form-control" %>
