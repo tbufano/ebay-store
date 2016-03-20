@@ -41,7 +41,6 @@ class ProductsController < ApplicationController
     else
       @product = Product.find_by(id: product_id)
     end
-    render = "show.html.erb"
   end
 
   def edit
