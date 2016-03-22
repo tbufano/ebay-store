@@ -7,7 +7,7 @@ class Order < ActiveRecord::Base
   end
 
   def order_tax
-    subtotal * product.tax
+    buy_quantity * product.tax
   end
 
   def order_total
