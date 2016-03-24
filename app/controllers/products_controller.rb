@@ -11,6 +11,8 @@ class ProductsController < ApplicationController
       @products = Product.order(sort_attribute_desc => :desc)
     elsif sort_by_amount
       @products = Product.where("#{sort_by_amount} < ?", 50)
+    elsif params[:category]
+      @products = Category.find_by(name: params[:category]).products
     else
       render "index.html.erb"
     end
