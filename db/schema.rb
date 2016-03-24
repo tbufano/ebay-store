@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160324015926) do
+ActiveRecord::Schema.define(version: 20160324021000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,11 +47,9 @@ ActiveRecord::Schema.define(version: 20160324015926) do
 
   create_table "orders", force: true do |t|
     t.integer  "user_id"
-    t.integer  "product_id"
-    t.integer  "buy_quantity"
-    t.decimal  "subtotal",     precision: 8, scale: 2
-    t.decimal  "tax",          precision: 8, scale: 2
-    t.decimal  "total",        precision: 8, scale: 2
+    t.decimal  "subtotal",   precision: 8, scale: 2
+    t.decimal  "tax",        precision: 8, scale: 2
+    t.decimal  "total",      precision: 8, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
   end
