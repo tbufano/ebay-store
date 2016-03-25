@@ -7,10 +7,10 @@ class CartedProductsController < ApplicationController
       user_id: current_user.id
     )
     # flash[:success] = "Product added!"
-    redirect_to "/carted_products/#{carted_products.id}"
+    redirect_to "/carted_products"
   end
 
-  def show
+  def index
     if current_user
       @carted_products = CartedProduct.where("status LIKE ? AND user_id = ?", "carted", current_user.id)
     else
