@@ -23,4 +23,9 @@
       <% end %>
     </tbody>
   </table>
+  <%= form_tag "/orders", method: :post do %>
+    <div class="form-group">
+      <%= submit_tag "Buy Now!", class: "btn btn-primary" %>
+    </div>
+  <% end %>
 </div>
