@@ -24,10 +24,10 @@
   <p><strong>Description:</strong> <%= @product.description %></p>
   <p><strong>Quantity:</strong> <%= @product.quantity %></p>
 
-  <%= form_tag "/orders", method: :post do %>
+  <%= form_tag "/carted_products", method: :post do %>
     <div class="form-group">
-      <%= label_tag :buy_quantity %>
-      <%= text_field_tag :buy_quantity, "", class: "form-control" %>
+      <%= label_tag :quantity %>
+      <%= text_field_tag :quantity, "", class: "form-control" %>
     </div>
     <div class="form-group">
       <%= hidden_field_tag :product_id, @product.id, class: "form-control" %>
