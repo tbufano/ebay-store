@@ -11,6 +11,10 @@ class CartedProductsController < ApplicationController
   end
 
   def show
-    @carted_product = CartedProduct.find_by(id: params[:id])
+    if current_user
+      @carted_products = CartedProduct.where("status LIKE ? AND user_id = ?", "carted", current_user.id)
+    else
+      redirect_to "/"
+    end
   end
 end
