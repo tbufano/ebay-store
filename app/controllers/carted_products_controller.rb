@@ -3,6 +3,7 @@ class CartedProductsController < ApplicationController
     carted_products = CartedProduct.create(
       quantity: params[:quantity],
       product_id: params[:product_id],
+      status: "carted",
       user_id: current_user.id
     )
     # flash[:success] = "Product added!"
