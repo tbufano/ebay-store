@@ -1,15 +1,10 @@
 <div class="container">
-  <h1>Congrats! Product added to order.</h1>
+  <h1>Order Info</h1>
 </div>
 
 <div class="container">
-  <p><strong>Purchased at:</p>
-  <p><strong>Order Id:</strong> <%= @order.id %></p>
-  <p><strong>Product name:</strong> <%= @order.product.name %></p>
-  <p><img src=""></p>
-  <p><strong>Email:</strong> <%= current_user.email %></p>
-  <p><strong>Order Quantity:</strong> <%= @order.buy_quantity %></p>
-  <p><strong>Subtotal:</strong> <%= @order.subtotal %></p>
-  <p><strong>Tax:</strong> <%= @order.tax %></p>
-  <p><strong>Total:</strong> <%= @order.total %></p>
+<% @order.carted_products.each do |carted_product| %>
+  <p>Name: <%= carted_product.product.name %></p>
+  <p>Quantity: <%= carted_product.quantity %></p>
+<% end %>
 </div>

@@ -7,26 +7,42 @@
 </div>
 
 <div class="container">
+  <% if @product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this article from being saved:</h2>
+   
+      <ul>
+      <% @product.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <%= form_tag '/products', method: :post do %>
     <div>
       <%= label_tag :title %>
-      <%= text_field_tag :title %>
+      <%= text_field_tag :title, @product.title %>
     </div>
     <div>
       <%= label_tag :description %>
-      <%= text_field_tag :description %>
-    </div>
-    <div>
-      <%= label_tag :image %>
-      <%= text_field_tag :image %>
+      <%= text_field_tag :description, @product.description %>
     </div>
     <div>
       <%= label_tag :price %>
-      <%= text_field_tag :price %>
+      <%= text_field_tag :price, @product.price %>
+    </div>
+    <div>
+      <%= label_tag :image %>
+      <%= text_field_tag :image, @product.supplier_id %>
     </div>
     <div>
       <%= label_tag :quantity %>
-      <%= text_field_tag :quantity %>
+      <%= text_field_tag :quantity, @product.quantity %>
+    </div>
+    <div>
+      <%= label_tag :supplier %>
+      <%= collection_select :supplier, :supplier_id, @suppliers, :id, :name %>
     </div>
     <div>
       <%= submit_tag "Add Product", class: "btn btn-primary" %>

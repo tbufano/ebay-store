@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_admin!, except: [:index, :show, :search]
+
   def index
     @products = Product.all
     @images = Image.all
@@ -19,20 +21,28 @@ class ProductsController < ApplicationController
   end
 
   def new
-    render = "new.html.erb"
+    @product = Product.new
+    @suppliers = Supplier.all
   end
 
   def create
-    product = Product.create(
+    @product = Product.new(
       title: params[:title],
       description: params[:description],
-      image: params[:image],
       price: params[:price],
+      supplier_id: params[:supplier][:supplier_id],
       quantity: params[:quantity],
       in_stock: params[:in_stock]
     )
-    flash[:success] = "Product successfully created!"
-    redirect_to "/products/#{product.id}"
+    if @product.save
+      @image = Image.new(src: params[:image], product_id: @product.id)
+      if @image.save
+        flash[:success] = "Product successfully created!"
+        redirect_to "/products/#{@product.id}"
+      else
+        render "new.html.erb"
+      end
+    end
   end
 
   def show
@@ -48,13 +58,12 @@ class ProductsController < ApplicationController
   def edit
     product_id = params[:id]
     @product = Product.find_by(id: product_id)
-    render 'edit.html.erb'
   end
 
   def update
     product_id = params[:id]
     @product = Product.find_by(id: product_id)
-    @product.update(
+    if @product.update(
       title: params[:title],
       description: params[:description],
       image: params[:image],
@@ -62,8 +71,11 @@ class ProductsController < ApplicationController
       quantity: params[:quantity],
       in_stock: params[:in_stock]
     )
-    flash[:success] = "Product successfully updated!"
-    redirect_to "/products/#{@product.id}"
+      flash[:success] = "Product successfully updated!"
+      redirect_to "/products/#{product.id}"
+    else
+      render "edit.html.erb"
+    end
   end
 
   def destroy
@@ -78,5 +90,13 @@ class ProductsController < ApplicationController
     search_term = params[:search]
     @products = Product.where("name LIKE ?", "%#{search_term}%")
     render 'index.html.erb'
+  end
+
+  private
+
+  def authenticate_admin!
+    unless current_user && current_user.admin
+      redirect_to "/"
+    end
   end
 end

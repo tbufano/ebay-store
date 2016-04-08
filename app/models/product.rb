@@ -5,7 +5,14 @@ class Product < ActiveRecord::Base
   has_many :categories, through: :categorized_products
   has_many :carted_products
   has_many :users, through: :carted_products
-  has_many :orders, through: :carted_products 
+  has_many :orders, through: :carted_products
+
+  validates :title, presence: true
+  validates :title, uniqueness: true
+  validates :price, presence: true
+  validates :price, numericality: { only_integer: true }
+  validates :price, numericality: { greater_than: 0 }
+  validates :supplier_id, presence: true
 
   def sale_message
     if price < 2
