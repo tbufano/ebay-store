@@ -20,4 +20,10 @@ class CartedProductsController < ApplicationController
     # flash[:success] = "Product added!"
     redirect_to "/carted_products"
   end
+
+  def update
+    if current_user
+      @carted_products = CartedProduct.where("")
+    end
+  end
 end
